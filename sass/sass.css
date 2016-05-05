@@ -14,7 +14,7 @@ body .particletext {
 @keyframes bubbles {
   0% {
     opacity: 0; }
-  20% {
+  10% {
     opacity: 1;
     transform: translate(0, -20%); }
   100% {

@@ -1,12 +1,23 @@
 .header {
     background-color: #eecf66;
-    height: 300px;
+    height: 200px;
 }
 
 .header h1 {
     color: #fff;
     font-weight: 100;
 }
+
+.banner {
+    height: 100px;
+    background-color: #ffffff;
+}
+
+.banner h3 {
+    font-weight: 200;
+}
+
+
 
 .breweries {
     background-color: #ededed;

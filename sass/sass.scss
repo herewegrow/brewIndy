@@ -21,7 +21,7 @@ body {
       0% {
         opacity: 0;
       }
-      20% { //show and hint at moving
+      10% { //show and hint at moving
         opacity: 1;
         transform: translate(0, -20%);
       }

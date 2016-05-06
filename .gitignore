@@ -1,0 +1,58 @@
+### Dependency Related
+bower_components/
+node_modules
+publish/
+build/
+built/
+dist/
+temp/
+.sass-cache
+
+### Webstorm Project Files
+.idea/
+.tmp/
+
+### Common file extensions to exclude
+*_i.c
+*_p.c
+*.ilk
+*.iml
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.scc
+
+### Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Mac desktop service store files
+.DS_Store
+
+# ========================
+# PROJECT SPECIFIC IGNORES
+# ========================
+
+tmp
+npm-debug.log

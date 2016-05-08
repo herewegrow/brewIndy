@@ -17,7 +17,7 @@
 
         /* default vals - TODO: need to move these into angular constants */
         var indianapolis = {latitude: 39.7790849, longitude: -86.1387615};
-        var zoom = 12;
+        var zoom = 13;
         var API_URL = 'http://localhost:8001/api';
         /* ====== */
         

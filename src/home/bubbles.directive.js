@@ -19,8 +19,8 @@
             for (var i=0; i <= bubbleCount; i++) {
                 var size = (rand(40,80) / 10);
                 var bubble = angular.element(
-                    '<span class="particle" style="top' + rand(20,80) + '%; left:'
-                    + rand(0,95) + '%; width:' + size + 'px; height:' + size + 'px;'
+                    '<span class="particle" style="top: ' + rand(20,80) + '%; left:'
+                    + rand(0,100) + '%; width:' + size + 'px; height:' + size + 'px;'
                     + 'animation-delay:' + (rand(0,30)/10) + 's;"></span>'
                 );
                 $element.append(bubble);

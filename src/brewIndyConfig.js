@@ -5,26 +5,23 @@
     "use strict";
     angular
         .module('brewIndy')
+        .constant('BI_CONST', BI_CONST())
         .config(brewIndyConfig)
-        // .config(uiGmapGoogleMapApi)
         .run(brewIndyRun);
 
-    brewIndyConfig.$inject = ['$locationProvider', '$httpProvider'];
-    function brewIndyConfig($locationProvider, $httpProvider) {
-        $locationProvider.html5Mode(true);
-        $httpProvider.defaults.useXDomain = true;
-        $httpProvider.defaults.withCredentials = true;
-        delete $httpProvider.defaults.headers.common["X-Requested-With"];
-        $httpProvider.defaults.headers.common["Accept"] = "application/json";
-        $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
+    function BI_CONST() {
+        return {
+            API_URL: 'http://localhost:8001/api',
+            indianapolis: {latitude: 39.7790849, longitude: -86.1387615},
+            zoom: 14
+        };
     }
 
-    // uiGmapGoogleMapApi.$inject = ['uiGmapGoogleMapApiProvider'];
-    // function uiGmapGoogleMapApi(uiGmapGoogleMapApiProvider) {
-    //     uiGmapGoogleMapApiProvider.configure({
-    //         key: 'AIzaSyDbRnxqCfp5q_8Tfn-SzVhG38JQBAvOjSw'
-    //     });
-    // }
+    brewIndyConfig.$inject = ['$locationProvider', '$compileProvider'];
+    function brewIndyConfig($locationProvider, $compileProvider) {
+        $locationProvider.html5Mode(true);
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(|blob|http|https):/);
+    }
 
     brewIndyRun.$inject = ['$rootScope'];
     function brewIndyRun($rootScope) {

@@ -7,19 +7,14 @@
         .module('brewIndy')
         .service('homeService', homeService);
 
-    homeService.$inject = ['geolocationService', '$http', 'NgMap', '$q'];
-    function homeService(geolocationService, $http, NgMap, $q) {
-        var map = {};
+    homeService.$inject = ['geolocationService', '$http', 'NgMap', '$q', 'BI_CONST'];
+    function homeService(geolocationService, $http, NgMap, $q, BI_CONST) {
+        
         var gmap;
         var userCoords;
+        var map = {};
         var places = [];
         var markers = [];
-
-        /* default vals - TODO: need to move these into angular constants */
-        var indianapolis = {latitude: 39.7790849, longitude: -86.1387615};
-        var zoom = 13;
-        var API_URL = 'http://localhost:8001/api';
-        /* ====== */
         
         return {
             init: init,
@@ -41,7 +36,7 @@
                         .then(function(loc){
                             userCoords = loc.coords;
                             map.center = [userCoords.latitude, userCoords.longitude];
-                            map.zoom = zoom;
+                            map.zoom = BI_CONST.zoom;
 
                             // TODO: can refactor this to use $q.when, so that we're not calling loadPlaces here and in the catch
                             loadPlaces()
@@ -56,10 +51,10 @@
                             //set default lat/long if unable to get user's location
                             map = {
                                 center: [
-                                    indianapolis.latitude,
-                                    indianapolis.longitude
+                                    BI_CONST.indianapolis.latitude,
+                                    BI_CONST.indianapolis.longitude
                                 ],
-                                zoom: zoom
+                                zoom: BI_CONST.zoom
                             };
                             loadPlaces()
                                 .then(function(){
@@ -80,7 +75,7 @@
                 '&longitude=' + map.center[1]
             ].join('');
             
-            return $http.get(API_URL + '/places/all' + params)
+            return $http.get(BI_CONST.API_URL + '/places/all' + params)
                 .then(function(res){
                     places = res.data.results;
                     markerCoords();

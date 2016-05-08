@@ -3,15 +3,15 @@
  */
 (function(){
     'use strict';
-
     angular
         .module('brewIndy', [
+            // Build Process Modules
+            'templates',
             // 3rd-party modules
             'ui.bootstrap',
             'ui.router',
-            'toastr'
-
+            'toastr',
+            'ngMap'
             // custom modules
-            
         ]);
 })();

@@ -1,24 +1,25 @@
 'use strict';
 
-const gulp = require('gulp'), //done
-    concat = require('gulp-concat'), //done
+const gulp = require('gulp'),
+    concat = require('gulp-concat'),
     eslint = require('gulp-eslint'),
-    uglify = require('gulp-uglify'), //done
-    html2js = require('gulp-ng-html2js'), //done
-    sass = require('gulp-sass'), //done
-    autoprefixer = require('gulp-autoprefixer'), //done
-    connect = require('gulp-connect'), //done
-    imagemin = require('gulp-imagemin'), //done
-    strip = require('gulp-strip-debug'), //done
-    gulpif = require('gulp-if'), //done
-    cacheBuster = require('gulp-cachebust'), //done
-    util = require('gulp-util'), //done
-    sourcemaps = require('gulp-sourcemaps'), //done
-    babel = require('gulp-babel'), //done
-    del = require('del'), //done
+    uglify = require('gulp-uglify'),
+    html2js = require('gulp-ng-html2js'),
+    sass = require('gulp-sass'),
+    autoprefixer = require('gulp-autoprefixer'),
+    connect = require('gulp-connect'),
+    imagemin = require('gulp-imagemin'),
+    strip = require('gulp-strip-debug'),
+    gulpif = require('gulp-if'),
+    cacheBuster = require('gulp-cachebust'),
+    util = require('gulp-util'),
+    sourcemaps = require('gulp-sourcemaps'),
+    babel = require('gulp-babel'),
+    del = require('del'),
     replace = require('gulp-replace'),
     rs = require('run-sequence'),
-    minimist = require('minimist'); //done
+    minimist = require('minimist'),
+    nodemon = require('gulp-nodemon');
 
 //specify the distribution folder for everything that gets compiled
 const build = 'build/',
@@ -82,7 +83,14 @@ const vendorJs = [
     'node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js',
     'node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
     'node_modules/angular-toastr/dist/angular-toastr.min.js',
-    'node_modules/angular-toastr/dist/angular-toastr.tpls.min.js'
+    'node_modules/angular-toastr/dist/angular-toastr.tpls.min.js',
+
+
+    'node_modules/ngmap/build/scripts/ng-map.min.js',
+    
+    // angular-google-maps dependencies:
+    // 'node_modules/angular-simple-logger/dist/angular-simple-logger.min.js',
+    // 'node_modules/angular-google-maps/dist/angular-google-maps.min.js'
     // 'node_modules/angular-touch/angular-touch.min.js',
     // 'node_modules/angulartics/dist/angulartics.min.js',
     // 'node_modules/angulartics-google-analytics/dist/angulartics-google-analytics.min.js',
@@ -119,7 +127,7 @@ gulp.task('internalJs', function() {
         .pipe(eslint.failAfterError())
         .pipe(replace("@@apiUrl", buildVars.apiUrl))
         .pipe(replace("@@psVersion", buildVars.psVersion))
-        .pipe(replace("@@env", buildVars.env))
+        .pipe(replace("@@env", buildVars.env))  
         .pipe(replace("@@color", buildVars.color))
         .pipe(babel()) //convert ES6 to ES5 syntax
         .pipe(concat('internal.js'))
@@ -242,6 +250,14 @@ gulp.task('startServer', function () {
 
 });
 
+gulp.task('nodestart', function () {
+    nodemon({
+        script: 'server.js'
+        //, ext: 'js html'
+        , env: { 'NODE_ENV': 'DEV' }
+    })
+});
+
 gulp.task('buildHtml', ['processBuildVars', 'vendorJs', 'combineJs', 'compileSass', 'vendorCss', 'images', 'fonts', 'webConfig'], function() {
     return gulp.src('src/index.html')
         .pipe(buster.references())
@@ -251,7 +267,7 @@ gulp.task('buildHtml', ['processBuildVars', 'vendorJs', 'combineJs', 'compileSas
 
 
 gulp.task('serve', function () {
-    return rs('clean-build', 'buildHtml', 'startServer');
+    return rs('clean-build', 'buildHtml', 'nodestart', 'startServer');
 
 });
 

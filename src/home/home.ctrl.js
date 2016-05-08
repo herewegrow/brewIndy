@@ -9,7 +9,6 @@
 
     HomeCtrl.$inject = ['homeService'];
     function HomeCtrl(homeService) {
-
         var vm = this;
 
         // ctrl properties

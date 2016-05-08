@@ -23,7 +23,7 @@
                 // cache the location for 10 mins
                 maximumAge: 600000,
                 // fail if lookup takes > 7s
-                timeout: 7000
+                timeout: 8000
             };
 
             if (!$window.navigator.geolocation) {

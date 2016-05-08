@@ -6,8 +6,7 @@
 
 var express = require('express'),
     session = require('express-session'),
-    bodyparser = require('body-parser'),
-    requestify = require('requestify');
+    bodyparser = require('body-parser');
 
 global.NODE_ENV = process.env.NODE_ENV;
 const PORT = 8001;
@@ -29,18 +28,11 @@ app.use(function(req, res, next) {
     }
 });
 
-console.log(__dirname);
-
 //////////////Begin Nested Routes//////////////
 var router = require('express').Router();
-
 router.use('/places', require('./api/places.js'));
-// router.use('/places', require('./places/places.js'));
+/////////////End Nested Routes/////////////////
 
-// router.get('/version', function (req,res) {
-//     var version = require('./version.json').version;
-//     res.send(version);
-// });
 app.use('/api',router);
 
 app.listen(PORT, function(){

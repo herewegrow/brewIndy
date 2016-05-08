@@ -253,7 +253,7 @@ gulp.task('startServer', function () {
 gulp.task('nodestart', function () {
     nodemon({
         script: 'server.js'
-        //, ext: 'js html'
+        , watch: ['server.js','api/**.js']
         , env: { 'NODE_ENV': 'DEV' }
     })
 });
@@ -281,6 +281,4 @@ gulp.task('watch', function() {
     // Watch any file for a change in the 'app' folder and recompile and reload the browser as required
     // -- removed 'clean-build' from this task, how to use "rs" within a watcher?
     return gulp.watch('src/**', ['buildHtml']);
-
-
 });
